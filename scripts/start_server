@@ -1,6 +1,7 @@
 #!/bin/bash
 service httpd start
 /tetetess.sh
+echo "hello"
 # if [ $? -ne 0 ]; then
 #   echo "faillure"
 # fi
