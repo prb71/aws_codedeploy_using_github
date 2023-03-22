@@ -1,8 +1,8 @@
 #!/bin/bash
 service httpd start
 /tetetess.sh
-exit 1
-# if [ $? -ne 0 ]; then
-#   echo "faillure"
-# fi
+if [ $? -ne 0 ]; then
+  echo "faillure"
+  exit 1
+fi
 
