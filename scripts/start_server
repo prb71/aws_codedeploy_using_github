@@ -1,6 +1,5 @@
 #!/bin/bash
 service httpd start
-./chdhdhhd.sh
 # if [ $? -ne 0 ]; then
 #   echo "faillure"
 # fi
