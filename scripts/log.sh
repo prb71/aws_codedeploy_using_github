@@ -4,10 +4,14 @@ TARGET_ID=$(aws deploy list-deployment-targets --deployment-id $DEPLOYMENT_ID  -
 
 aws deploy batch-get-deployment-targets --deployment-id $DEPLOYMENT_ID --region us-east-2  --target-ids TARGET_ID | grep -i scriptfailed 
 
-if [ echo $? -ne 0 ]; then
+if [ echo $? -eq 0 ]; then
 
 echo "codedeploy failed"
 
 exit 1
+
+else
+
+exit 0
 
 fi
