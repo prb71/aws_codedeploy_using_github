@@ -8,4 +8,6 @@ if [ echo $? -ne 0 ]; then
 
 echo "codedeploy failed"
 
+exit 1
+
 fi
