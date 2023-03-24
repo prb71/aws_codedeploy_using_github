@@ -16,6 +16,8 @@ hooks:
       timeout: 300
       runas: root
   AfterInstall:
+    - export DEPLOYMENT_ID=$DEPLOYMENT_ID
     - location: scripts/log.sh
       timeout: 300
       runas: root
+      ignoreFailures: true
