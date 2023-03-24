@@ -15,11 +15,11 @@ hooks:
     - location: scripts/stop_server
       timeout: 300
       runas: root
+      ignoreFailures: true
   AfterInstall:
     - location: scripts/log.sh
       timeout: 300
       runas: root
-      ignoreFailures: true
       environment:
         - name: DEPLOYMENT_ID
           value: !Ref AWS::StackName
