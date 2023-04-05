@@ -16,6 +16,17 @@
 
 service httpd start
 
+#pipeline-name=$(aws deploy get-deployment --deployment-id d-XDQU9BRDM --query "deploymentInfo.revision.s3Location.key" | sed 's/"//g; s|/.*||')
+
+execution_type=$(aws codepipeline list-pipeline-executions --pipeline-name deploy-log --query 'pipelineExecutionSummaries[0].trigger.triggerType'|sed 's/\"//g')
+
+if [ "$execution_type" == "Webhook" ]; then
+echo "Executed Automatically" > /root/yes.txt
+else
+echo "Executed Manually"
+fi
+
+
 # /tetetess.sh
 
 # TARGET_ID=$(aws deploy list-deployment-targets --deployment-id $DEPLOYMENT_ID  --region us-east-2  | jq .targetIds | sed 's/\"//g'| sed 's/\[//g' | sed 's/\]//g')
