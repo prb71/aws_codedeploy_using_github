@@ -1,22 +1,22 @@
-#!/bin/bash
-function message() {
-    cat /var/log/aws/codedeploy-agent/codedeploy-agent.log | tail -300 > /root/codeeploy_errorlog.txt
-    curl -F file=@/root/codeeploy_errorlog.txt -F "initial_comment=Error Logs For the Codebuild" -F channels=C04BB1ZPA91 -H "Authorization: Bearer xoxp-4376808933893-4403454396848-4969571972838-5fa4dbbfd2fd21f895b0549bc22b32df" https://slack.com/api/files.upload
+# #!/bin/bash
+# function message() {
+#     cat /var/log/aws/codedeploy-agent/codedeploy-agent.log | tail -300 > /root/codeeploy_errorlog.txt
+#     curl -F file=@/root/codeeploy_errorlog.txt -F "initial_comment=Error Logs For the Codebuild" -F channels=C04BB1ZPA91 -H "Authorization: Bearer xoxp-4376808933893-4403454396848-4969571972838-5fa4dbbfd2fd21f895b0549bc22b32df" https://slack.com/api/files.upload
 
-}
+# }
 
-function error() {
-    local exit_code="$?"
-    message
-    exit "${exit_code}"
-}
+# function error() {
+#     local exit_code="$?"
+#     message
+#     exit "${exit_code}"
+# }
 
-trap 'error' ERR
+# trap 'error' ERR
 
 
 service httpd start
 
-/tetetess.sh
+# /tetetess.sh
 
 # TARGET_ID=$(aws deploy list-deployment-targets --deployment-id $DEPLOYMENT_ID  --region us-east-2  | jq .targetIds | sed 's/\"//g'| sed 's/\[//g' | sed 's/\]//g')
 
