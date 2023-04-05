@@ -11,6 +11,9 @@ hooks:
     - location: scripts/start_server
       timeout: 300
       runas: root
+      env:
+       DEPLOYMENT_ID: !Ref AWS::DeploymentId
+       AWS_CODEPIPELINE_PIPELINE_NAME: !Ref AWS::CodePipeline::PipelineName
   ApplicationStop:
     - location: scripts/stop_server
       timeout: 300
