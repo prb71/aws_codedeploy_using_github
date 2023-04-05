@@ -18,7 +18,7 @@ service httpd start
 
 #pipeline-name=$(aws deploy get-deployment --deployment-id d-XDQU9BRDM --query "deploymentInfo.revision.s3Location.key" | sed 's/"//g; s|/.*||')
 
-execution_type=$(aws codepipeline list-pipeline-executions --region us-east-2 --pipeline-name deploy-log --query 'pipelineExecutionSummaries[0].trigger.triggerType'|sed 's/\"//g')
+execution_type=$(aws codepipeline list-pipeline-executions --region us-east-2 --pipeline-name $AWS_CODEPIPELINE_PIPELINE_NAME --query 'pipelineExecutionSummaries[0].trigger.triggerType'|sed 's/\"//g')
 
 if [ "$execution_type" == "Webhook" ]; then
 echo "Executed Automatically" > /root/yes.txt
