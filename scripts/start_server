@@ -20,10 +20,15 @@ service httpd start
 
 pipeline-name=$(aws codepipeline list-pipelines --region us-east-2 | grep $(aws deploy get-deployment --region us-east-2 --deployment-id $DEPLOYMENT_ID --query "deploymentInfo.revision.s3Location.key" | sed 's/"//g; s|/.*||') | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
 
+test=$(aws deploy get-deployment --deployment-id d-XDQU9BRDM --query "deploymentInfo.revision.s3Location.key" | sed 's/"//g; s|/.*||')
+
+name=$(aws codepipeline list-pipelines --region us-east-2 | grep $test | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
+
+
 #execution_type=$(aws codepipeline list-pipeline-executions --region us-east-2 --pipeline-name $pipeline-name --query 'pipelineExecutionSummaries[0].trigger.triggerType'|sed 's/\"//g')
 
 if [ "$execution_type" == "Webhook" ]; then
-echo "Executed Automatically for $pipeline-name and $DEPLOYMENT_ID" > /root/yes.txt
+echo "Executed Automatically for $name and $DEPLOYMENT_ID" > /root/yes.txt
 else
 echo "Executed Manually"
 fi
