@@ -18,7 +18,8 @@ service httpd start
 
 #pipeline-name=$(aws deploy get-deployment --deployment-id d-XDQU9BRDM --query "deploymentInfo.revision.s3Location.key" | sed 's/"//g; s|/.*||')
 
-#pipeline-name=$(aws codepipeline list-pipelines --region us-east-2 | grep $(aws deploy get-deployment --region us-east-2 --deployment-id $DEPLOYMENT_ID --query "deploymentInfo.revision.s3Location.key" | sed 's/"//g; s|/.*||') | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
+
+pipeline-name=$(aws codepipeline list-pipelines --region us-east-2 | grep $(aws deploy get-deployment --region us-east-2 --deployment-id $DEPLOYMENT_ID --query "deploymentInfo.revision.s3Location.key" | sed 's/"//g; s|/.*||') | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
 
 test=$(aws deploy get-deployment --region us-east-2 --deployment-id $DEPLOYMENT_ID --query "deploymentInfo.revision.s3Location.key" | sed 's/"//g; s|/.*||')
 
