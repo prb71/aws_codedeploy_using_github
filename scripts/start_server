@@ -24,17 +24,13 @@ test=$(aws deploy get-deployment --region us-east-2 --deployment-id $DEPLOYMENT_
 
 name=$(aws codepipeline list-pipelines --region us-east-2 | grep $test | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
 
-echo "$test" > /root/test.txt
+execution_type=$(aws codepipeline list-pipeline-executions --region us-east-2 --pipeline-name $name --query 'pipelineExecutionSummaries[0].trigger.triggerType'|sed 's/\"//g')
 
-echo "$name" > /root/name.txt
-
-#execution_type=$(aws codepipeline list-pipeline-executions --region us-east-2 --pipeline-name $pipeline-name --query 'pipelineExecutionSummaries[0].trigger.triggerType'|sed 's/\"//g')
-
-#if [ "$execution_type" == "Webhook" ]; then
-#echo "Executed Automatically for $name and $DEPLOYMENT_ID" > /root/yes.txt
-#else
-#echo "Executed Manually"
-#fi
+if [ "$execution_type" == "Webhook" ]; then
+echo "Executed Automatically for $name and $DEPLOYMENT_ID" > /root/yes.txt
+else
+echo "Executed Manually"
+fi
 
 
 # /tetetess.sh
